@@ -957,6 +957,7 @@ static void brcm_pcie_msi_isr(struct irq_desc *desc)
 				/* Unknown MSI, just clear it */
 				dev_dbg(dev, "unexpected MSI\n");
 			}
+#endif
 		}
 	}
 	chained_irq_exit(chip, desc);
