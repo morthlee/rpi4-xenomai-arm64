@@ -914,6 +914,7 @@ static struct irq_chip brcm_msi_irq_chip = {
 	.name = "Brcm_MSI",
 	.irq_mask = pci_msi_mask_irq,
 	.irq_unmask = pci_msi_unmask_irq,
+	.flags = IRQCHIP_PIPELINE_SAFE,
 };
 
 static struct msi_domain_info brcm_msi_domain_info = {
@@ -942,7 +943,9 @@ static void brcm_pcie_msi_isr(struct irq_desc *desc)
 
 			/* Account for legacy interrupt offset */
 			hwirq = bit - msi->intr_legacy_offset;
-
+#ifdef CONFIG_IPIPE
+            ipipe_handle_demuxed_irq(irq_linear_revmap(msi->inner_domain, hwirq));
+#else
 			virq = irq_find_mapping(msi->inner_domain, hwirq);
 			if (virq) {
 				if (msi->used & (1 << hwirq))
