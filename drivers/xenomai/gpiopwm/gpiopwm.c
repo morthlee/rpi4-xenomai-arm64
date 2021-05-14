@@ -20,7 +20,7 @@
 #include <linux/gpio.h>
 #include <linux/module.h>
 #include <rtdm/driver.h>
-#include <rtdm/gpiopwm.h>
+#include <rtdm/uapi/gpiopwm.h>
 
 MODULE_AUTHOR("Jorge Ramirez <jro@xenomai.org>");
 MODULE_DESCRIPTION("PWM driver");
