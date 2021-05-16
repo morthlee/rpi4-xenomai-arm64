@@ -1,3 +1,5 @@
+Before compiling kernel images, make sure ``CONFIG_STRICT_DEVMEM=n'' in your configuration!!
+
 Linux kernel
 ============
 
